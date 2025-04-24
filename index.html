@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OptiVibe Digital Marketing Agency</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS (v2.2.19) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome 6.5.2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+  <!-- Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(120deg, #f3f4fa 0%, #ffeedd 100%);
+    }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(.55,0,.1,1), transform 0.8s cubic-bezier(.55,0,.1,1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal {
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 0.7s cubic-bezier(.55,0,.1,1), transform 0.7s cubic-bezier(.55,0,.1,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    ::-webkit-scrollbar { width: 0; height: 0;}
+    html {
+      scroll-behavior: smooth;
+      background: transparent;
+    }
+    .bg-animated {
+      background: linear-gradient(270deg, #cfdeff, #ffeedd, #f3f4fa, #ffebee);
+      background-size: 800% 800%;
+      animation: bgmove 20s ease infinite;
+    }
+    @keyframes bgmove {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .headline-highlight {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+    .headline-highlight:before {
+      content: "";
+      position: absolute;
+      left: -8px; right: -8px; top: 60%; height: 36%;
+      background: linear-gradient(90deg,#6366f1aa,#ec4899aa,#f59e42aa);
+      border-radius: 8px 8px 50px 50px;
+      z-index: -1;
+      filter: blur(8px);
+      animation: highlight-fade 2s 0.5s 1 forwards;
+      opacity: 0.7;
+    }
+    @keyframes highlight-fade {
+      0% { opacity: 0 }
+      100% { opacity: 0.5 }
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+    .section-title:after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -4px; height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #6366f1aa 40%, #f59e42aa 100%);
+      opacity: 0.8;
+      animation: titlebar 1.4s 0.2s forwards;
+      transform: scaleX(0);
+      transition: transform .6s;
+    }
+    .section-title.visible:after {
+      transform: scaleX(1);
+    }
+    @keyframes titlebar {
+      0% {transform: scaleX(0);}
+      80% {transform: scaleX(1.15);}
+      100%{transform: scaleX(1);}
+    }
+    /* Extra Animations */
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-8deg);}
+      10% {transform: rotate(6deg);}
+      20% {transform: rotate(-8deg);}
+      40% {transform: rotate(7deg);}
+      50% {transform: rotate(0deg);}
+      60% {transform: rotate(-5deg);}
+      80% {transform: rotate(8deg);}
+    }
+    .animate-wiggle { animation: wiggle 2.3s infinite ease-in-out; }
+    @keyframes float {
+      0%, 100% { transform: translateY(-3px);}
+      50% { transform: translateY(10px);}
+    }
+    .animate-float { animation: float 2.6s infinite ease-in-out; }
+    @keyframes spin-slow {
+      0%{ transform: rotate(0deg);}
+      100%{ transform: rotate(360deg);}
+    }
+    .animate-spin-slow { animation: spin-slow 6.5s linear infinite;}
+  </style>
+</head>
+<body class="bg-animated min-h-screen text-gray-800 pt-0 pb-12">
+
+  <!-- HEADER -->
+  <header class="w-full px-6 py-10 flex flex-col items-center justify-center relative">
+    <div class="fade-up text-center max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight text-gray-900" style="letter-spacing:-1px;">
+        <span class="headline-highlight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-500">OPTIVIBE</span>
+        <span class="block text-xl mt-3 font-semibold text-gray-600 tracking-widest uppercase">Digital Marketing Agency</span>
+      </h1>
+      <p class="text-lg md:text-xl mt-2 text-gray-700 w-full max-w-2xl mx-auto">
+        We help brands <strong>grow and shine online</strong> with cutting-edge SEO, dynamic WordPress and Shopify solutions, and eye-catching graphic design.
+      </p>
+    </div>
+    <div class="flex justify-center space-x-4 mt-8 fade-up">
+      <a href="#services" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-pink-500 text-white rounded-xl font-bold text-lg shadow-lg transform transition hover:scale-105 hover:shadow-xl focus:outline-none">
+        Our Services
+      </a>
+      <a href="#portfolio" class="px-6 py-3 bg-white border-2 border-indigo-500 text-indigo-700 rounded-xl font-bold text-lg shadow-lg hover:bg-indigo-50 transition focus:outline-none">
+        Portfolio
+      </a>
+    </div>
+    <span class="absolute top-2 right-10 hidden md:inline-block animate-bounce text-pink-300 text-3xl opacity-40">
+      <i class="fas fa-bolt"></i>
+    </span>
+    <span class="absolute bottom-10 left-8 hidden md:inline-block animate-pulse text-indigo-300 text-4xl opacity-30">
+      <i class="fas fa-chart-line"></i>
+    </span>
+  </header>
+
+  <!-- SERVICES SECTION -->
+  <section id="services" class="mt-2 mb-16 px-4 md:px-12 lg:px-28">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Our Expertise</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto max-w-6xl">
+
+      <div class="reveal bg-white rounded-2xl shadow-xl p-7 flex flex-col items-center text-center border-b-4 border-indigo-400 hover:-translate-y-2 transform transition duration-500">
+        <span class="text-indigo-600 text-5xl mb-4 animate-spin-slow">
+          <i class="fas fa-search"></i>
+        </span>
+        <h3 class="font-semibold text-xl mb-2">SEO Optimization</h3>
+        <p class="text-gray-700 mb-3">Boost your rankings and traffic with our advanced, data-driven SEO strategies tailored to your goals.</p>
+        <span class="uppercase text-sm mt-auto tracking-wider text-indigo-400 font-bold">
+          Keyword Research • Analytics • On/Off Page
+        </span>
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-xl p-7 flex flex-col items-center text-center border-b-4 border-pink-400 hover:-translate-y-2 transform transition duration-500">
+        <span class="text-pink-500 text-5xl mb-4 animate-bounce">
+          <i class="fab fa-wordpress"></i>
+        </span>
+        <h3 class="font-semibold text-xl mb-2">WordPress Development</h3>
+        <p class="text-gray-700 mb-3">Custom, responsive WordPress websites that grow with your business and deliver seamless user experiences.</p>
+        <span class="uppercase text-sm mt-auto tracking-wider text-pink-400 font-bold">
+          Themes • Plugins • Performance
+        </span>
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-xl p-7 flex flex-col items-center text-center border-b-4 border-amber-400 hover:-translate-y-2 transform transition duration-500">
+        <span class="text-amber-500 text-5xl mb-4 animate-wiggle">
+          <i class="fab fa-shopify"></i>
+        </span>
+        <h3 class="font-semibold text-xl mb-2">Shopify Stores</h3>
+        <p class="text-gray-700 mb-3">Launch, grow, or optimize your Shopify store with stunning product pages and seamless checkout flows.</p>
+        <span class="uppercase text-sm mt-auto tracking-wider text-amber-400 font-bold">
+          Storefront • Apps • Conversion
+        </span>
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-xl p-7 flex flex-col items-center text-center border-b-4 border-teal-400 hover:-translate-y-2 transform transition duration-500">
+        <span class="text-teal-500 text-5xl mb-4 animate-float">
+          <i class="fas fa-paint-brush"></i>
+        </span>
+        <h3 class="font-semibold text-xl mb-2">Graphic Design</h3>
+        <p class="text-gray-700 mb-3">Brand identities, digital assets, and marketing visuals that turn heads and tell your story beautifully.</p>
+        <span class="uppercase text-sm mt-auto tracking-wider text-teal-400 font-bold">
+          Branding • Creatives • UI/UX
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS WORKFLOW -->
+  <section id="process" class="mb-16 px-4 md:px-20 lg:px-56">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Our Workflow</h2>
+    <div class="relative flex flex-col md:flex-row items-center justify-between md:space-x-0 space-y-8 md:space-y-0 max-w-4xl mx-auto">
+      <div class="reveal flex flex-col items-center md:w-1/5">
+        <span class="text-2xl md:text-3xl bg-indigo-100 text-indigo-600 rounded-full p-4 border-4 border-indigo-200 mb-2">
+          <i class="fas fa-bullseye"></i>
+        </span>
+        <div class="font-semibold text-center">Discovery</div>
+        <div class="text-xs text-gray-500 text-center">Understanding your vision</div>
+      </div>
+      <div class="hidden md:block w-1/12 h-1 bg-gradient-to-r from-indigo-400 via-pink-300 to-yellow-400 rounded-full"></div>
+      <div class="reveal flex flex-col items-center md:w-1/5">
+        <span class="text-2xl md:text-3xl bg-pink-100 text-pink-500 rounded-full p-4 border-4 border-pink-200 mb-2">
+          <i class="fas fa-brain"></i>
+        </span>
+        <div class="font-semibold text-center">Strategy</div>
+        <div class="text-xs text-gray-500 text-center">Creative planning and solutions</div>
+      </div>
+      <div class="hidden md:block w-1/12 h-1 bg-gradient-to-r from-pink-300 via-amber-300 to-teal-400 rounded-full"></div>
+      <div class="reveal flex flex-col items-center md:w-1/5">
+        <span class="text-2xl md:text-3xl bg-yellow-100 text-amber-500 rounded-full p-4 border-4 border-amber-200 mb-2">
+          <i class="fas fa-rocket"></i>
+        </span>
+        <div class="font-semibold text-center">Execution</div>
+        <div class="text-xs text-gray-500 text-center">Building & launching high-impact assets</div>
+      </div>
+      <div class="hidden md:block w-1/12 h-1 bg-gradient-to-r from-amber-300 via-teal-300 to-indigo-400 rounded-full"></div>
+      <div class="reveal flex flex-col items-center md:w-1/5">
+        <span class="text-2xl md:text-3xl bg-teal-100 text-teal-500 rounded-full p-4 border-4 border-teal-200 mb-2">
+          <i class="fas fa-sync-alt"></i>
+        </span>
+        <div class="font-semibold text-center">Refinement</div>
+        <div class="text-xs text-gray-500 text-center">Data-driven improvements</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="case-studies" class="mb-16 px-4 md:px-16 lg:px-44">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Case Studies</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+      <div class="reveal bg-white border-t-4 border-indigo-300 rounded-2xl shadow-xl p-6 flex flex-col md:flex-row items-center space-y-4 md:space-x-5 md:space-y-0 hover:scale-105 transform transition">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" width="120" height="120" alt="Growth for SaaS Company" class="rounded-xl w-28 h-28 object-cover mb-2 md:mb-0">
+        <div>
+          <h3 class="font-bold text-indigo-700 text-xl mb-1">B2B SaaS: SEO Overhaul</h3>
+          <p class="text-gray-700 text-sm mb-2">Problem: Low search visibility.<br>Solution: In-depth audit, technical fixes, content upgrade.<br><strong>Result: +280% organic leads, 2.8x traffic in 8mo.</strong></p>
+          <div class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">SEO / Analytics</div>
+        </div>
+      </div>
+      <div class="reveal bg-white border-t-4 border-pink-300 rounded-2xl shadow-xl p-6 flex flex-col md:flex-row items-center space-y-4 md:space-x-5 md:space-y-0 hover:scale-105 transform transition">
+        <img src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=400&q=80" width="120" height="120" alt="Brand Identity and Shopify" class="rounded-xl w-28 h-28 object-cover mb-2 md:mb-0">
+        <div>
+          <h3 class="font-bold text-pink-700 text-xl mb-1">Ecom Startup: Brand + Shopify</h3>
+          <p class="text-gray-700 text-sm mb-2">Problem: Flat sales, generic look.<br>Solution: Rebranding, new Shopify, custom graphics.<br><strong>Result: 3x conversion rate in 4 mo.</strong></p>
+          <div class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded">Shopify / Branding</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-center items-center mt-10 space-y-8 md:space-y-0 md:space-x-16">
+      <div class="reveal max-w-sm mx-auto flex flex-col items-center">
+        <canvas id="caseStudyChart" height="180" width="320"></canvas>
+      </div>
+      <div class="reveal max-w-md mx-auto text-lg text-gray-700">
+        <div class="flex items-center mb-3">
+          <span class="w-3 h-3 rounded-full bg-indigo-400 mr-2"></span>Organic Traffic
+          <span class="w-3 h-3 rounded-full bg-pink-400 ml-6 mr-2"></span>Conversion Rate
+        </div>
+        <p>
+          Our proven approach gets results! The chart highlights dramatic growth for real clients—demonstrating traffic surges and conversion leaps after working with OptVibe's expert team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING PLANS -->
+  <section id="pricing" class="mb-16 px-4 md:px-20">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Pricing Plans</h2>
+    <div class="flex flex-col lg:flex-row justify-center items-center space-y-8 lg:space-y-0 lg:space-x-10 max-w-5xl mx-auto">
+      <div class="reveal w-full lg:w-1/3 bg-white border-b-4 border-indigo-300 rounded-2xl shadow-xl p-8 flex flex-col items-center hover:scale-105 transform transition">
+        <div class="mb-2 text-indigo-500 text-3xl"><i class="fas fa-seedling"></i></div>
+        <div class="font-bold text-xl mb-1">Starter</div>
+        <div class="text-3xl font-extrabold text-indigo-800 mb-3">$499</div>
+        <ul class="mb-5 text-gray-700 text-sm text-center space-y-1">
+          <li>5 Page Website or SEO Audit</li>
+          <li>Basic Graphic Design</li>
+          <li>Email Support for 14 days</li>
+        </ul>
+        <div class="inline-block rounded border border-indigo-400 text-indigo-700 px-4 py-2 mt-auto font-semibold text-sm">Great for getting started.</div>
+      </div>
+      <div class="reveal w-full lg:w-1/3 bg-white border-b-4 border-pink-400 rounded-2xl shadow-2xl p-10 flex flex-col items-center scale-105 z-10 relative hover:scale-110 transform transition">
+        <div class="mb-2 text-pink-500 text-3xl"><i class="fas fa-fire"></i></div>
+        <div class="font-bold text-xl mb-1">Growth</div>
+        <div class="text-3xl font-extrabold text-pink-700 mb-3">$1399</div>
+        <ul class="mb-5 text-gray-700 text-sm text-center space-y-1">
+          <li>Full WordPress/Shopify Setup</li>
+          <li>SEO + Keyword Targeting</li>
+          <li>Custom Graphics</li>
+          <li>Priority Support</li>
+          <li>Monthly Analytics Report</li>
+        </ul>
+        <div class="inline-block rounded border border-pink-400 text-pink-700 px-4 py-2 mt-auto font-semibold text-sm">Our Most Popular Plan</div>
+      </div>
+      <div class="reveal w-full lg:w-1/3 bg-white border-b-4 border-amber-400 rounded-2xl shadow-xl p-8 flex flex-col items-center hover:scale-105 transform transition">
+        <div class="mb-2 text-amber-500 text-3xl"><i class="fas fa-gem"></i></div>
+        <div class="font-bold text-xl mb-1">Premium</div>
+        <div class="text-3xl font-extrabold text-amber-700 mb-3">$2699</div>
+        <ul class="mb-5 text-gray-700 text-sm text-center space-y-1">
+          <li>Everything in Growth, PLUS:</li>
+          <li>Brand Strategy + UI/UX</li>
+          <li>Advanced SEO (International/Local)</li>
+          <li>Dedicated Success Manager</li>
+        </ul>
+        <div class="inline-block rounded border border-amber-400 text-amber-700 px-4 py-2 mt-auto font-semibold text-sm">For ambitious brands.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM MEMBERS -->
+  <section id="team" class="mb-16 px-4 md:px-20 lg:px-44">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Meet the Team</h2>
+    <div class="flex flex-col md:flex-row md:space-x-10 space-y-8 md:space-y-0 justify-center items-center max-w-5xl mx-auto">
+      <div class="reveal bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-full md:w-1/4">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-full w-24 h-24 object-cover mb-3" alt="Leon Hassan - SEO Lead" loading="lazy">
+        <div class="font-bold text-lg">Leon Hassan</div>
+        <div class="text-pink-600 font-semibold mb-1 text-sm">SEO Lead</div>
+        <div class="text-gray-500 text-xs text-center">Technical SEO & analytics wizard who loves boosting client results.</div>
+        <div class="flex gap-2 mt-2">
+          <a href="#" class="text-indigo-400 hover:text-indigo-600" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-full md:w-1/4">
+        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-full w-24 h-24 object-cover mb-3" alt="Mia Collins - Web/Shopify" loading="lazy">
+        <div class="font-bold text-lg">Mia Collins</div>
+        <div class="text-amber-500 font-semibold mb-1 text-sm">Web & Shopify Expert</div>
+        <div class="text-gray-500 text-xs text-center">Loves crafting stunning, conversion-focused shops and WP sites.</div>
+        <div class="flex gap-2 mt-2">
+          <a href="#" class="text-indigo-400 hover:text-indigo-600" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-full md:w-1/4">
+        <img src="https://randomuser.me/api/portraits/men/33.jpg" class="rounded-full w-24 h-24 object-cover mb-3" alt="Alex Yen - Creative Director" loading="lazy">
+        <div class="font-bold text-lg">Alex Yen</div>
+        <div class="text-teal-500 font-semibold mb-1 text-sm">Creative Director</div>
+        <div class="text-gray-500 text-xs text-center">Brings brands to life with design, animation, and fresh ideas.</div>
+        <div class="flex gap-2 mt-2">
+          <a href="#" class="text-indigo-400 hover:text-indigo-600" title="Behance"><i class="fab fa-behance"></i></a>
+        </div>
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-full md:w-1/4">
+        <img src="https://randomuser.me/api/portraits/women/48.jpg" class="rounded-full w-24 h-24 object-cover mb-3" alt="Jenna Lee - Project Manager" loading="lazy">
+        <div class="font-bold text-lg">Jenna Lee</div>
+        <div class="text-indigo-500 font-semibold mb-1 text-sm">Project Manager</div>
+        <div class="text-gray-500 text-xs text-center">Ensures deadlines, clarity, and smiles throughout every project.</div>
+        <div class="flex gap-2 mt-2">
+          <a href="#" class="text-indigo-400 hover:text-indigo-600" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section id="blog" class="mb-16 px-4 md:px-20 lg:px-44">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-8 text-gray-900 fade-up">Latest Blog Insights</h2>
+    <div class="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+      <div class="reveal bg-white shadow-xl rounded-2xl p-5 flex-1 flex flex-col hover:scale-105 transform transition">
+        <div class="mb-2 text-sm uppercase text-indigo-400">SEO & Growth</div>
+        <a href="#" class="font-bold text-xl text-indigo-700 mb-2 block hover:underline">Top SEO Trends in 2024 (+ actionable wins!)</a>
+        <p class="text-gray-700 mb-2">From Google's algorithm changes to voice search, these are the pivotal shifts you MUST act on this year.</p>
+        <div class="flex items-center text-gray-400 text-xs mt-auto"><i class="fas fa-calendar mr-1"></i> Mar 2, 2024</div>
+      </div>
+      <div class="reveal bg-white shadow-xl rounded-2xl p-5 flex-1 flex flex-col hover:scale-105 transform transition">
+        <div class="mb-2 text-sm uppercase text-pink-400">Web & Design</div>
+        <a href="#" class="font-bold text-xl text-pink-700 mb-2 block hover:underline">Creating Product Pages That Convert</a>
+        <p class="text-gray-700 mb-2">Key design and UX strategies to turn more browsers into buyers on Shopify or WordPress.</p>
+        <div class="flex items-center text-gray-400 text-xs mt-auto"><i class="fas fa-calendar mr-1"></i> Feb 17, 2024</div>
+      </div>
+      <div class="reveal bg-white shadow-xl rounded-2xl p-5 flex-1 flex flex-col hover:scale-105 transform transition">
+        <div class="mb-2 text-sm uppercase text-amber-400">Brand & Strategy</div>
+        <a href="#" class="font-bold text-xl text-amber-700 mb-2 block hover:underline">Is Your Brand Memorable?</a>
+        <p class="text-gray-700 mb-2">5 fast fixes from our creative team to level up your brand identity this quarter.</p>
+        <div class="flex items-center text-gray-400 text-xs mt-auto"><i class="fas fa-calendar mr-1"></i> Jan 28, 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION  -->
+  <section id="faq" class="mb-16 px-4 md:px-24 max-w-4xl mx-auto">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Frequently Asked Questions</h2>
+    <div class="reveal divide-y divide-indigo-100 rounded-xl shadow-xl bg-white p-7">
+      <details class="py-4">
+        <summary class="font-semibold cursor-pointer hover:text-indigo-600 transition-all focus:outline-none">What services does OptVibe offer?</summary>
+        <div class="pl-2 pt-2 text-gray-700 text-sm">
+          We deliver SEO, WordPress development, Shopify store creation, and custom graphic design—all tailored to help your brand scale.
+        </div>
+      </details>
+      <details class="py-4">
+        <summary class="font-semibold cursor-pointer hover:text-indigo-600 transition-all focus:outline-none">Can you help my existing website, not just build new?</summary>
+        <div class="pl-2 pt-2 text-gray-700 text-sm">
+          Absolutely! From deep SEO audits and redesigns to performance tuning and ongoing optimization, we help both established and new sites thrive.
+        </div>
+      </details>
+      <details class="py-4">
+        <summary class="font-semibold cursor-pointer hover:text-indigo-600 transition-all focus:outline-none">How do your packages/pricing work?</summary>
+        <div class="pl-2 pt-2 text-gray-700 text-sm">
+          We offer flexible packages for all stages: from one-off projects to ongoing retainers. See above for pricing or ask us for a custom quote!
+        </div>
+      </details>
+      <details class="py-4">
+        <summary class="font-semibold cursor-pointer hover:text-indigo-600 transition-all focus:outline-none">How long does a typical project take?</summary>
+        <div class="pl-2 pt-2 text-gray-700 text-sm">
+          It depends on scope, but most projects take 2–6 weeks, with clear milestones and dedicated project management throughout.
+        </div>
+      </details>
+      <details class="py-4">
+        <summary class="font-semibold cursor-pointer hover:text-indigo-600 transition-all focus:outline-none">What makes OptVibe unique?</summary>
+        <div class="pl-2 pt-2 text-gray-700 text-sm">
+          We combine data-driven tactics with creative flair, transparent communication, and a true passion for our clients’ growth. We treat your business like our own!
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO SECTION -->
+  <section id="portfolio" class="mb-16 px-4 md:px-16 lg:px-44">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-8 text-gray-900 fade-up">Our Work</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <div class="reveal rounded-2xl bg-white shadow-xl p-5 flex flex-col group border-t-4 border-indigo-400 hover:scale-105 transform transition">
+        <div class="w-full mb-4 rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="SEO Project" class="w-full h-48 object-cover group-hover:scale-110 transition" loading="lazy">
+        </div>
+        <h3 class="font-bold text-lg text-indigo-700 mb-1">Organic Traffic Surge for SaaS</h3>
+        <p class="text-gray-700 mb-2 text-sm">+160% organic growth in 6 months through in-depth SEO, technical audits, and keyword targeting.</p>
+        <span class="text-xs bg-indigo-100 text-indigo-600 rounded px-2 py-1 mt-auto mb-1 font-medium">SEO</span>
+      </div>
+      <div class="reveal rounded-2xl bg-white shadow-xl p-5 flex flex-col group border-t-4 border-pink-400 hover:scale-105 transform transition">
+        <div class="w-full mb-4 rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80" alt="WordPress Project" class="w-full h-48 object-cover group-hover:scale-110 transition" loading="lazy">
+        </div>
+        <h3 class="font-bold text-lg text-pink-600 mb-1">Modern WP Blog for Entrepreneurs</h3>
+        <p class="text-gray-700 mb-2 text-sm">Custom WordPress theme, blazing fast load times, and seamless editor experience.</p>
+        <span class="text-xs bg-pink-100 text-pink-600 rounded px-2 py-1 mt-auto mb-1 font-medium">WordPress</span>
+      </div>
+      <div class="reveal rounded-2xl bg-white shadow-xl p-5 flex flex-col group border-t-4 border-amber-400 hover:scale-105 transform transition">
+        <div class="w-full mb-4 rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?auto=format&fit=crop&w=600&q=80" alt="Shopify Project" class="w-full h-48 object-cover group-hover:scale-110 transition" loading="lazy">
+        </div>
+        <h3 class="font-bold text-lg text-amber-600 mb-1">Shopify: Ecom Lifestyle Brand</h3>
+        <p class="text-gray-700 mb-2 text-sm">Premium, mobile-optimized Shopify storefront that doubled conversions in 30 days.</p>
+        <span class="text-xs bg-amber-100 text-amber-600 rounded px-2 py-1 mt-auto mb-1 font-medium">Shopify</span>
+      </div>
+      <div class="reveal rounded-2xl bg-white shadow-xl p-5 flex flex-col group border-t-4 border-teal-400 hover:scale-105 transform transition">
+        <div class="w-full mb-4 rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Graphic Design Project" class="w-full h-48 object-cover group-hover:scale-110 transition" loading="lazy">
+        </div>
+        <h3 class="font-bold text-lg text-teal-600 mb-1">Brand Visuals: Luxe Cosmetics</h3>
+        <p class="text-gray-700 mb-2 text-sm">Complete branding kit, logo, and digital campaign graphics with high-converting creatives.</p>
+        <span class="text-xs bg-teal-100 text-teal-600 rounded px-2 py-1 mt-auto mb-1 font-medium">Graphic Design</span>
+      </div>
+      <div class="reveal rounded-2xl bg-white shadow-xl p-5 flex flex-col group border-t-4 border-indigo-400 hover:scale-105 transform transition">
+        <div class="w-full mb-4 rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?auto=format&fit=crop&w=600&q=80" alt="SEO/Content Project" class="w-full h-48 object-cover group-hover:scale-110 transition" loading="lazy">
+        </div>
+        <h3 class="font-bold text-lg text-indigo-600 mb-1">SEO + Content: SaaS Fintech</h3>
+        <p class="text-gray-700 mb-2 text-sm">From keyword mapping to on-page SEO, grew leads and visibility in a competitive niche.</p>
+        <span class="text-xs bg-indigo-100 text-indigo-600 rounded px-2 py-1 mt-auto mb-1 font-medium">SEO, Content</span>
+      </div>
+      <div class="reveal rounded-2xl bg-white shadow-xl p-5 flex flex-col group border-t-4 border-pink-400 hover:scale-105 transform transition">
+        <div class="w-full mb-4 rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="WP Membership Project" class="w-full h-48 object-cover group-hover:scale-110 transition" loading="lazy">
+        </div>
+        <h3 class="font-bold text-lg text-pink-700 mb-1">WP Membership Portal</h3>
+        <p class="text-gray-700 mb-2 text-sm">Bespoke user dashboards, easy payments, and interactive features for a coaching platform.</p>
+        <span class="text-xs bg-pink-100 text-pink-600 rounded px-2 py-1 mt-auto mb-1 font-medium">WordPress, UI/UX</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="mb-16 px-3 md:px-28">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 fade-up">Why Choose OptVibe?</h2>
+    <div class="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10 max-w-5xl mx-auto">
+      <div class="reveal flex-shrink-0 text-center">
+        <span class="inline-block animate-spin text-6xl text-indigo-400 mb-2"><i class="fas fa-star"></i></span>
+        <div class="font-semibold text-lg text-indigo-800">Expert Team</div>
+      </div>
+      <div class="reveal flex-shrink-0 text-center">
+        <span class="inline-block animate-pulse text-6xl text-pink-400 mb-2"><i class="fas fa-bolt"></i></span>
+        <div class="font-semibold text-lg text-pink-700">Agile Delivery</div>
+      </div>
+      <div class="reveal flex-shrink-0 text-center">
+        <span class="inline-block animate-wiggle text-6xl text-amber-400 mb-2"><i class="fas fa-thumbs-up"></i></span>
+        <div class="font-semibold text-lg text-amber-700">Transparent Pricing</div>
+      </div>
+      <div class="reveal flex-shrink-0 text-center">
+        <span class="inline-block animate-float text-6xl text-teal-400 mb-2"><i class="fas fa-heart"></i></span>
+        <div class="font-semibold text-lg text-teal-700">Client Focused</div>
+      </div>
+    </div>
+    <p class="reveal text-center mt-10 text-lg text-gray-700 max-w-2xl mx-auto">
+      Get real, measurable results with a partner who listens to your needs and brings energy, expertise, and creativity to every project.
+    </p>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="mb-16 px-4 md:px-16 max-w-xl mx-auto">
+    <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900 fade-up">Let's Connect</h2>
+    <p class="fade-up text-center mb-6 text-lg text-gray-700">
+      Ready to accelerate your digital presence? Reach out for a quote or free strategy session!
+    </p>
+    <form class="reveal bg-white rounded-xl shadow-lg px-6 py-7 space-y-5">
+      <div>
+        <label for="name" class="font-semibold text-gray-800 mb-2 block">Name</label>
+        <input id="name" type="text" autocomplete="name" class="w-full px-4 py-2 rounded-lg border-2 border-indigo-100 focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition outline-none text-gray-900" placeholder="Your Name" required>
+      </div>
+      <div>
+        <label for="email" class="font-semibold text-gray-800 mb-2 block">Email</label>
+        <input id="email" type="email" autocomplete="email" class="w-full px-4 py-2 rounded-lg border-2 border-indigo-100 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition outline-none text-gray-900" placeholder="you@example.com" required>
+      </div>
+      <div>
+        <label for="message" class="font-semibold text-gray-800 mb-2 block">Message</label>
+        <textarea id="message" rows="3" class="w-full px-4 py-2 rounded-lg border-2 border-amber-100 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 outline-none transition text-gray-900" placeholder="Tell us your goals"></textarea>
+      </div>
+      <button type="submit" class="w-full py-3 font-bold rounded-lg bg-gradient-to-r from-indigo-500 to-pink-500 text-white shadow-lg text-lg transition hover:scale-105 hover:shadow-xl focus:outline-none">
+        Send Message
+      </button>
+    </form>
+    <div class="fade-up flex justify-center gap-5 pt-6">
+      <a href="/cdn-cgi/l/email-protection#066e636a6a69466976726f706f64632865696b" target="_blank" rel="noopener" class="text-2xl text-indigo-400 hover:text-indigo-600 transition"><i class="fas fa-envelope"></i></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener" class="text-2xl text-blue-600 hover:text-blue-800 transition"><i class="fab fa-linkedin"></i></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener" class="text-2xl text-pink-400 hover:text-pink-600 transition"><i class="fab fa-twitter"></i></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener" class="text-2xl text-blue-400 hover:text-blue-600 transition"><i class="fab fa-facebook"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center w-full pb-6 pt-8 text-gray-500 text-sm">
+    <div>OptiVibe Digital Marketing Agency &copy; 2024 &mdash; <span class="font-semibold text-indigo-500">All rights reserved.</span></div>
+    <div>Made with <span class="text-pink-500">&#10084;</span> for brands that dare to grow.</div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // On-scroll reveal logic
+    function runOnScrollAnimation() {
+      var revealEls = document.querySelectorAll('.fade-up, .reveal, .section-title');
+      var windowH = window.innerHeight;
+      for(let i = 0; i < revealEls.length; i++){
+        var el = revealEls[i], pos = el.getBoundingClientRect().top;
+        if(pos < windowH - 40) el.classList.add('visible');
+      }
+    }
+    window.addEventListener('scroll', runOnScrollAnimation); 
+    window.addEventListener('resize', runOnScrollAnimation);
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(runOnScrollAnimation, 200);
+
+      // Chart.js data for case study chart
+      const ctx = document.getElementById('caseStudyChart');
+      if(ctx) {
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'],
+            datasets: [{
+              label: 'Organic Traffic',
+              data: [600, 900, 1200, 1700, 2800, 3450],
+              borderColor: '#6366f1',
+              backgroundColor: 'rgba(99,102,241,0.12)',
+              tension: 0.4,
+              fill: true,
+              pointRadius: 3,
+              pointHoverRadius: 6,
+            },
+            {
+              label: 'Conversion Rate',
+              data: [1.6, 1.8, 2.1, 2.9, 4.2, 5.0],
+              borderColor: '#ec4899',
+              backgroundColor: 'rgba(236,72,153,0.10)',
+              borderDash: [7,5],
+              yAxisID: 'y1',
+              tension: 0.4,
+              fill: true,
+              pointRadius: 3,
+              pointHoverRadius: 6,
+            }]
+          },
+          options: {
+            responsive: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    if(context.datasetIndex === 1) return `${context.dataset.label}: ${context.parsed.y}%`;
+                    return context.dataset.label + ': ' + context.parsed.y;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {display: false}
+              },
+              y: {
+                beginAtZero: true,
+                ticks: {stepSize: 1000, color:'#8493b4', font:{size:11}},
+                title: {display: true, text: 'Visits', color:'#6366f1'},
+                grid: {color:'#eef2ff'}
+              },
+              y1: {
+                beginAtZero:true,
+                position: 'right',
+                min: 0,
+                max: 6,
+                ticks: {stepSize: 1, color:'#ec4899', font:{size:11}, callback: v=>v+'%'},
+                grid: {drawOnChartArea:false}
+              }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
